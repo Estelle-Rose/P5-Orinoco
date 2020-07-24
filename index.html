@@ -23,9 +23,10 @@
     <meta property="twitter:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png">
             
     <!-- Bootstrap CSS -->
+    <script src="https://kit.fontawesome.com/862e0a79f6.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <script src= "js/index.js" async></script>
+    
 </head>
 <body>
   
@@ -40,15 +41,21 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Accueil <span class="sr-only">(current)</span></a>
+                        <a class="nav-link " href="index.html">Accueil <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="cart.html">Panier</a>
+                        <a class="nav-link" href="product.html">Produit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart" alt=" Panier"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order.html">Commande</a>
                     </li>
                     
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Recherche">
+                    <input class="form-control mr-sm-2 " type="search" placeholder="Recherche" aria-label="Recherche">
                     <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Rechercher</button>
                     </form>
                 </div>
@@ -68,9 +75,11 @@
     <!--Main-->
     <div class="container main">
         <div class="row d-flex flex-column">
-            <div class="col-md-9 col-xs-12 d-flex flex-column" id="product-list">
-                    
+            <div class="col-md-9 col-xs-12 d-flex flex-column" id="product_list">                    
             </div>
+           <div>
+               <p class="text-center text-white large"id="error_message"></p>
+           </div> 
         </div>
     </div>
     <!--Main-->
@@ -79,7 +88,7 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2020 Copyright:
-      <a href="#" class="text-white"> Orinoco</a>
+      <a href="#"> Orinoco</a>
     </div>
     <!-- Copyright -->
   
@@ -92,6 +101,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- JavaScript -->
-    <script src= "js/index.js"></script>
+    <script type ="module" src= "js/index.js"></script>
+    
 </body>
 </html>

@@ -1,91 +1,98 @@
-// Récupération des cameras avec Appel de l'API avec fetch
 
-const getProducts = async function() {
-    try {
-        let response = await fetch('http://localhost:3000/api/cameras/')
-        if (response.ok) {
-        let cameras = await response.json();
-        console.log(cameras) ;
-        showProducts(cameras);
-        }
-        else {
-            console.error('retour du serveur : ', response.status)
-            let divError = document.createElement('div');
-            let main = document.getElementById('main');
-            main.appendChild(divError);
-            divError.innerHTML = alert('Erreur du serveur, merci de nous excusez pour la gêne occasionnée');
-        }
-        
-    } catch (error) {
-        console.log(error)
-    }
 
+ let url = 'http://localhost:3000/api/cameras/';
+ let idProduct = "";
+ //récupération de l'id produit
+
+let queryString = window.location.search;
+let urlParams = new URLSearchParams(queryString);
+
+
+// Fonction pour récevoir les produits de l'api//
+function getProducts(url) {
+    return new Promise ((resolve, reject) => {
+    let request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState == XMLHttpRequest.DONE) {
+            if (this.status == 200) {
+            resolve(JSON.parse(this.responseText));
+            console.log('OK');
+            } else {
+                console.log('NOT OK');
+                reject(document.getElementById('error_message').innerHTML = 'Veuillez nous excuser pour la gêne occasionnée');
+            }    
+}
+    };
+request.open("GET", url);
+request.send();
+});
 };
-getProducts();
 
-// Fonction showProdutcs pour afficher les produits sur la page index.html
-function showProducts(cameras) {
-    console.log(cameras);
-    for (i = 0; i < cameras.length; i++) {        
-   
+
+
+// Affichage des produits dans la liste
+function showProducts() {
+getProducts(url).then(function(response) {  
            
-    // récupération de la div contenant la liste des produits
-    let list = document.getElementById('product-list');
-    // création du modèle products list et insertion des données récupérées
-    list.innerHTML += `
-        <ul class="list-group shadow">                    
-                <li class="list-group-item">                    
-                <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                    <div class="media-body order-2 order-lg-1">
-                    <h3 class="mt-0 font-weight-bold mb-1">${cameras[i].name}</h3>
-                    
-                    <p class="card-text lenses medium">
-                    Deux objectifs disponibles                           
-                    </p>
-                    <div class="d-flex align-items-center justify-content-between mt-1">
-                        <h4 class="font-weight-bold my-2">${cameras[i].price} €</h6>                        
-                            
-                        
-                    </div>
-                    <div class="text-center">
-                    <a href="product.html" class="list-group-item list-group-item-secondary" id="fiche_produit">Voir le produit</a>
-                            </div>
-                    </div><img src=${cameras[i].imageUrl} alt="Generic placeholder image" class="ml-lg-5 order-1 order-lg-2">
-                </div>
-                <!-- End -->
-                </li>
-        </ul>
-        `;
+    response.forEach(response => {              
+              
+        idProduct = response._id; 
+        // récupération de la div contenant la liste des produits
+        let list = document.getElementById('product_list');
+        // création des nouveaux éléments du dom
+        let listUl = document.createElement('ul');
+        let listLi = document.createElement('li');
+        let listBox = document.createElement('div');
+        let listDiv = document.createElement('div');
+        let name = document.createElement('h3');
+        let priceDiv = document.createElement('div');
+        let price = document.createElement('h4');
+        let linkDiv = document.createElement('div');
+        let link = document.createElement('a');
+        let img = document.createElement('img');
         
-    };    
-};     
-
-// Récupération de la div contenant la product card
-const card = document.getElementById('product-card');
-
-//création du modèle product card
-       card.innerHTML += `
-            
-            <div class="card d-flex ">        
-                <div class="product-image d-flex justify-content-center">
-                    <img src =${cameras[i].imageUrl}>
-                </div>                    
-                <div class="card-body">                        
-                    <h4 class="card-title font-weight-bold mb-2 name">${cameras[i].name}</h4>                        
-                    <p class="card-text description">${cameras[i].description}. </p>                        
-                    <p class="card-text lenses">
-                        Deux objectifs disponibles                           
-                    </p>                        
-                </div>
-                <div class="card-footer bg-transparent ">
-                    <div class="price d-flex justify-content-between"><span>Prix</span><strong>${cameras[i].price}</strong></div>
-                    <div class="text-right">
-                        <button class="btn btn-block btn-primary text-center">
-                        Fiche produit
-                        <i class="lnr lnr-chevron-right pl-2"></i>
-                        </button>
-                    </div> 
-                </div>
-            </div>
-                
-        `;
+        // structure des nouveaux éléments
+        list.appendChild(listUl);
+        listUl.appendChild(listLi);
+        listLi.appendChild(listBox);
+        listBox.appendChild(listDiv);  
+        listBox.appendChild(img);    
+        listDiv.appendChild(name); 
+        listDiv.appendChild(priceDiv);
+        listDiv.appendChild(linkDiv);   
+        priceDiv.appendChild(price);   
+        linkDiv.appendChild(link);
+        
+        // Ajout des attributs et classes aux éléments
+        listUl.setAttribute('class','list-group');
+        listUl.classList.add('shadow');
+        listLi.setAttribute('class','list-group-item');
+        listBox.setAttribute('class','media');
+        listBox.classList.add ('align-items-lg-center','flex-column','flex-lg-row','p-3');
+        listDiv.setAttribute('class','media-body');
+        listDiv.classList.add('order-2','order-lg-1');
+        name.setAttribute('id','listname');
+        name.setAttribute('class','mt-0');
+        name.classList.add('font-weight-bold','mb-1');
+        priceDiv.setAttribute('class','d-flex');
+        priceDiv.classList.add('align-items-center','justify-content-between','mt-1');
+        price.setAttribute('class','font-weight-bold');
+        price.classList.add('my-2');
+        linkDiv.setAttribute('class','text-center');
+        link.setAttribute('class','list-group-item');
+        link.setAttribute('href', "product.html?_id=" + idProduct);
+        link.classList.add('list-group-item-secondary');
+        img.setAttribute('class','ml-lg-5');
+        img.classList.add('order-1','order-lg-2');    
+        
+        // Contenu textuel des éléments créés
+        name.innerHTML = response.name;
+        price.innerHTML = response.price / 100 + " €";
+        img.setAttribute('src', response.imageUrl);
+        link.innerHTML = "Voir le produit";
+        link.setAttribute('id', 'fiche_produit'); // Id du lien vers fiche produit        
+        });
+        });
+    };
+    showProducts();
+    

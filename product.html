@@ -10,6 +10,7 @@
     <meta name="robots" content="noindex, nofollow">
     
     <!-- Bootstrap CSS -->
+    <script src="https://kit.fontawesome.com/862e0a79f6.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     
@@ -30,7 +31,7 @@
                         <a class="nav-link" href="index.html">Accueil <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="cart.html">Panier</a>
+                        <a class="nav-link" href="cart.html">Panier <i class="fas fa-shopping-cart" alt=" Panier"></i></a>
                     </li>
                     
                     </ul>
@@ -47,17 +48,42 @@
     <div class="container">
         <header class="row">
             <div class="col-md-6 offset-md-3">
-                <h1 class="text-center">Notre sélection de produits</h1>
+                <h1 class="text-center" id="product_name"></h1>
             </div>
             
         </header>
     </div>
 
     <!--Main-->
-    <div class="container">
+    <div class="container main">
         <div class="row d-flex flex-column">
-            <div class="col-md-9 d-flex flex-column" id="product-card">
-                    
+            <div class="col-md-8 d-flex flex-column" id="product_card">
+                <div class="card d-flex ">        
+                    <div class="product-image d-flex justify-content-center">
+                        <img id="product_img">
+                    </div>                    
+                    <div class="card-body">                                       
+                        <p class="card-text description" id="product_description">Description </p>                        
+                        <div class="form-group">
+                            <label for="lens_option">Objectifs proposés</label>
+                            <select class="form-control" id="lens_option">
+                              <option>1</option>
+                              <option>2</option>  
+                            </select>
+                        </div>              
+                    </div>
+                    <div class="card-footer bg-transparent ">
+                        <div class="price d-flex justify-content-between">
+                            <strong>Prix :</strong>
+                            <h5 id="product_price"></h5>
+                       
+                            <button class="btn btn-block btn-secondary text-center" id="cart_button" >
+                            <a href="cart.html" id="add_to_cart" class="text-white">Ajouter au panier</a>
+                            <i class="fas fa-shopping-cart" alt=" Panier"></i>
+                            </button>
+                        </div> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -79,5 +105,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- JavaScript -->
+    <script type ="module"src= "js/product.js"></script>
+    
 </body>
 </html>
