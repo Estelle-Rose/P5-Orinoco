@@ -1,42 +1,33 @@
+ // Création du tableau contenant les articles du panier
 
-
- let url = 'http://localhost:3000/api/cameras/';
- let idProduct = "";
- //récupération de l'id produit
-
-let queryString = window.location.search;
-let urlParams = new URLSearchParams(queryString);
-
-
-// Fonction pour récevoir les produits de l'api//
-function getProducts(url) {
-    return new Promise ((resolve, reject) => {
-    let request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if (this.readyState == XMLHttpRequest.DONE) {
-            if (this.status == 200) {
-            resolve(JSON.parse(this.responseText));
-            console.log('OK');
-            } else {
-                console.log('NOT OK');
-                reject(document.getElementById('error_message').innerHTML = 'Veuillez nous excuser pour la gêne occasionnée');
-            }    
+if(localStorage.getItem('items')) {
+    console.log('le panier existe')
+} else {
+    let items = [];
+    localStorage.setItem('items', JSON.stringify(items));
+    console.log('le panier est vide');
 }
-    };
-request.open("GET", url);
-request.send();
+let items = JSON.parse(localStorage.getItem('items'));
+// Url de l'api
+ let url = 'http://localhost:3000/api/cameras/'; // Url pour récupérer la liste de caméras
+// Api fetch
+fetch(url)
+.then(function(response) {
+    if(response.ok) {
+        response.json()
+        .then(function(cameras) {
+            showProducts(cameras);
+        });
+    }
+})
+.catch(function(){
+    alert("pas de réponse du serveur")
 });
-};
 
+//Fonction pour créer la liste des produits
+function showProducts(cameras) {
+    for (let camera of cameras) {            
 
-
-// Affichage des produits dans la liste
-function showProducts() {
-getProducts(url).then(function(response) {  
-           
-    response.forEach(response => {              
-              
-        idProduct = response._id; 
         // récupération de la div contenant la liste des produits
         let list = document.getElementById('product_list');
         // création des nouveaux éléments du dom
@@ -80,19 +71,30 @@ getProducts(url).then(function(response) {
         price.classList.add('my-2');
         linkDiv.setAttribute('class','text-center');
         link.setAttribute('class','list-group-item');
-        link.setAttribute('href', "product.html?_id=" + idProduct);
+        link.setAttribute('id', 'lien_fiche');
+        link.setAttribute('href', "product.html?_id=" + camera._id);
         link.classList.add('list-group-item-secondary');
         img.setAttribute('class','ml-lg-5');
         img.classList.add('order-1','order-lg-2');    
         
         // Contenu textuel des éléments créés
-        name.innerHTML = response.name;
-        price.innerHTML = response.price / 100 + " €";
-        img.setAttribute('src', response.imageUrl);
+        name.innerHTML = camera.name;
+        price.innerHTML = camera.price / 100 + " €";
+        img.setAttribute('src', camera.imageUrl);
         link.innerHTML = "Voir le produit";
         link.setAttribute('id', 'fiche_produit'); // Id du lien vers fiche produit        
-        });
-        });
-    };
-    showProducts();
-    
+        };
+        
+     
+};
+
+// fonction pour afficher le nombre d'articles dans le panier (from localstorage)
+function onLoadCartItems() {
+    let itemsNumber = localStorage.getItem('cartItems');
+    if(itemsNumber) {
+        document.querySelector('.cart span').textContent = itemsNumber;
+    }
+};
+onLoadCartItems();
+
+export {url, items, onLoadCartItems};
