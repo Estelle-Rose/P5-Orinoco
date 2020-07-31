@@ -34,5 +34,8 @@ app.use(bodyParser.json());
 app.use('/api/cameras', cameraRoutes);
 app.use('/api/teddies', teddyRoutes);
 app.use('/api/furniture', furnitureRoutes);
-
+app.use(express.static("public"));
+app.get('/', function(req,res) {
+  res.sendFile( __dirname + "/" + "index.html" )
+});
 module.exports = app;
