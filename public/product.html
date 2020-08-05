@@ -34,7 +34,7 @@
                     </li>
                     
                     <li class="nav-item cart">
-                        <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart" alt=" Panier"></i><span>0</span>
+                        <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart" alt=" Panier"></i><span class="cart-items">0</span>
                         </a>
                     </li>
                     
@@ -75,36 +75,19 @@
                         </div>          
                                    
                     </div>
-                    <div class="card-footer bg-transparent">
-                        <div>                            
+                    <div class="card-footer bg-transparent ">
+                        <div class="d-flex justify-content-between">                            
                             <!--Quantity input button-->
                             <form class="d-flex justify-content-between">
-                                <div class="form-group w-50 lenses-box">
-                                    <label for="lenses">Objectifs proposés</label>
-                                    <select class="form-control" id="lenses"></select>                          
-                                    
-                                </div>   
-                                <div class="form-group w-25 d-flex quantity-box">
-                                    <label for="Quantity" class="item-quantity">Quantité</label>
-                                    <select class="form-control" id="quantity" >
-                                    <option class="select" value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    </select>
-                                </div>
-                            </form>
-                            <div class="d-flex flex-row-reverse">
-                                <div class="form-group w-25 d-flex ">
-                                    <button  class="btn btn-secondary add_to_cart">Ajouter au panier</button>
-                                </div>
+                                <div class="form-group  d-flex lenses-box">
+                                    <label for="lenses" required>Objectifs proposés</label>
+                                    <select class="form-control" id="lenses"required></select>                       
+                                </div>                                 
+                            </form>                            
+                            <div class="form-group">                                    
+                                <button  class="btn btn-secondary add_to_cart" data-id="1">Ajouter au panier</button>
                             </div>
+                            
                         </div> 
                     </div>
                 </div>

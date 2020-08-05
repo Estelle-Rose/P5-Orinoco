@@ -115,10 +115,9 @@ h1 {
   .fa-shopping-cart {
     margin-left: 5px;
   }
-  .cart-quantity-input {
-    width: 3em;
+  .bloc-quantity {
     margin-top: 20px;
-    margin-left: 15px;
+    margin-left: -20px;
   }
 .cart span {
   margin-left: 10px;

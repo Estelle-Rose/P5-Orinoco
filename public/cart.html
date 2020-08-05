@@ -13,7 +13,7 @@
     <script src="https://kit.fontawesome.com/862e0a79f6.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    
+    <script type ="module" src= "js/product.js" async></script>
     <script type ="module" src= "js/cart.js" async></script>
 </head>
 <body>
@@ -33,7 +33,7 @@
                         </li>
                         
                         <li class="nav-item cart">
-                            <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart" alt=" Panier"></i><span>0</span>
+                            <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart" alt=" Panier"></i><span class="cart-items">0</span>
                             </a>
                         </li>             
                     </ul>
@@ -48,7 +48,7 @@
     <div class="container">
         <header class="row">
             <div class="col-md-6 offset-md-3">
-                <h1 class="text-center">Votre panier</h1>
+                <h1 class="text-center panier-title">Votre panier</h1>
             </div>
             
         </header>
@@ -76,7 +76,9 @@
                             <th scope="col" class="border-0 bg-light">
                                 <div class="py-2 text-uppercase">Quantité</div>
                             </th>
-                            
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="py-2 text-uppercase">Total</div>
+                            </th>
                             <th scope="col" class="border-0 bg-light">
                                 <div class="py-2 text-uppercase">Supprimer</div>
                             </th>
@@ -123,13 +125,11 @@
                         <div class="col-6 order-box">
                                 <div class="bg-light s px-4 py-3 text-uppercase font-weight-bold">Résumé de votre commande</div>
                                 
-                                    <div class="price-container p-4 d-flex justify-content-between">
-                                        <h4 class="total_title">Total du panier :</h4>
-                                        <h4 class="total_price">,00 €</h4>
-                                    </div>`
-                                    
+                                <div class="price-container p-4 d-flex justify-content-between">
+                                    <h4 class="cart-total">Total du panier :</h4>
+                                    <h4><span class="total_price"></span></h4>
                                 </div>      
-                                <a href="order.html" class="btn btn-dark rounded-pill py-2 btn-block">Valider la commande</a>                          
+                                <a href="order.html" class="btn btn-dark rounded-pill py-2 btn-block submit-order">Valider la commande</a>                          
                         </div>
                         
                     </div>

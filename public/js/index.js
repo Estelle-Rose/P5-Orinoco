@@ -1,17 +1,7 @@
- // Création du tableau contenant les articles du panier
 
-if(localStorage.getItem('items')) {
-    console.log('le panier existe')
-} else {
-    let items = [];
-    localStorage.setItem('items', JSON.stringify(items));
-    console.log('le panier est vide');
-}
-let items = JSON.parse(localStorage.getItem('items'));
-// Url de l'api
- let url = 'http://localhost:3000/api/cameras/'; // Url pour récupérer la liste de caméras
+ // Url pour récupérer la liste de caméras
 // Api fetch
-fetch(url)
+fetch('http://localhost:3000/api/cameras/') // Url pour récupérer la liste de caméras
 .then(function(response) {
     if(response.ok) {
         response.json()
@@ -90,11 +80,11 @@ function showProducts(cameras) {
 
 // fonction pour afficher le nombre d'articles dans le panier (from localstorage)
 function onLoadCartItems() {
-    let itemsNumber = localStorage.getItem('cartItems');
-    if(itemsNumber) {
-        document.querySelector('.cart span').textContent = itemsNumber;
+    let itemsInCart = localStorage.getItem('cartItems');
+    if(itemsInCart) {
+        document.querySelector('.cart-items').textContent = itemsInCart;
     }
 };
 onLoadCartItems();
 
-export {url, items, onLoadCartItems};
+export {onLoadCartItems};
