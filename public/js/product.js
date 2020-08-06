@@ -11,8 +11,7 @@ fetch('http://localhost:3000/api/cameras/' + idProduit)
         response.json()        
         .then(function(camera) {
             //console.log(camera)
-            productCard(camera); // appel de la fonction productCard
-            
+            productCard(camera); // appel de la fonction productCard            
         });
     }
 })
@@ -38,17 +37,10 @@ function productCard(camera) {
     let price = localStorage.getItem('price');
     price = parseInt(price);
     let quantity = localStorage.getItem('quantity');       
-    quantity = parseInt(quantity);
-    localStorage.setItem('totalItemCost',price);
-    let totalItemCost = localStorage.getItem('totalItemCost');
-    totalItemCost = parseInt(totalItemCost);
-  
-
+    quantity = parseInt(quantity);    
     
     lensOption(camera);
-    getAddBtn(camera);
-
-    
+    getAddBtn(camera);   
 };    
 
 // ******************* Choix de l'objectif *************************
@@ -74,13 +66,13 @@ for (let i = 0; i < camera.lenses.length; i++) {
 // ******************** Ajout au panier *******************
 
 function getAddBtn(camera) {
+    let items = localStorage.getItem('cart');
     let addToCartBtn = document.querySelectorAll('.add_to_cart');    
-    addToCartBtn.forEach(addToCartBtn => {
-     
+    addToCartBtn.forEach(addToCartBtn => {     
         addToCartBtn.addEventListener('click', () => {   
             console.log('added to cart');   
-            updatepanier();  
-            createItem();                
+            updatepanier();              
+            createItem();                                       
         });
     });
 };
@@ -118,9 +110,7 @@ class Item {
 
 function createItem() {
     let itemId = idProduit;
-    let lensChoice = localStorage.getItem('lens');
-    
-    
+    let lensChoice = localStorage.getItem('lens');    
     let items = JSON.parse(localStorage.getItem('cart'));
     if (items === null) { // si c'est le premier article sélectionné et ajouté, on créé un premier article et on l'ajoute au tableau du panier
         let cart = [];
@@ -130,46 +120,57 @@ function createItem() {
         localStorage.getItem('lens'),
         localStorage.getItem('price'),
         localStorage.getItem('id'),
-        localStorage.getItem('quantity'),
-        localStorage.getItem('totalItemCost'));
-        
+        localStorage.getItem('quantity'));           
         cart.push(firstItem);
-        localStorage.setItem('cart', JSON.stringify(cart));    // l'article est dans le localsotrage
+        localStorage.setItem('cart', JSON.stringify(cart));   // l'article est dans le localsotrage 
+       
     } else { // On vérifie si le produit a déjà été ajouté, si oui on ajoute + 1 à la quantité de l'article
         let newItem = JSON.parse(localStorage.getItem('cart'));
         let itemAdded = false;
         for (let i in newItem ) {
-            if (newItem[i].id === itemId && newItem[i].lens === lensChoice) { // On check l'id du produit et l'objectif sélectionné
+            if ((newItem[i].id + newItem[i].lens) === (itemId + lensChoice)) { // On check l'id du produit et l'objectif sélectionné
                 itemAdded = true;
                 let quantity = localStorage.getItem('quantity');
                 quantity = parseInt(quantity);         
                 newItem[i].quantity = parseInt(newItem[i].quantity);
                 localStorage.setItem('quantity', newItem[i].quantity += 1);
-                let price = localStorage.getItem('price');
-                newItem[i].price = parseFloat(newItem[i].price); 
-                let totalItemCost = localStorage.getItem('totalItemCost');
-                localStorage.setItem('totalItemCost',newItem[i].totalItemCost + newItem[i].price);
-                newItem[i].totalItemCost = parseFloat(newItem[i].totalItemCost); 
-
             }
         }
 
-    if (!itemAdded) { // Si le produit n'a pas déjà été ajouté on ajoute un deuxième article
-        newItem.push(new Item( 
-            localStorage.getItem('img'),
-            localStorage.getItem('name'),
-            localStorage.getItem('lens'),
-            localStorage.getItem('price'),
-            localStorage.getItem('id'),
-            localStorage.getItem('quantity'),
-            localStorage.getItem('totalItemCost')));
+        if (!itemAdded) { // Si le produit n'a pas déjà été ajouté on ajoute un deuxième article
+            newItem.push(new Item( 
+                localStorage.getItem('img'),
+                localStorage.getItem('name'),
+                localStorage.getItem('lens'),
+                localStorage.getItem('price'),
+                localStorage.getItem('id'),
+                localStorage.getItem('quantity')));
+        }
+        localStorage.setItem('cart', JSON.stringify(newItem));
+        
     }
-    localStorage.setItem('cart', JSON.stringify(newItem));
-} 
-
-
-};
     
+};
+
+
+/*function totalCost( item, action ) {
+    let totaldupanier = localStorage.getItem("totalCart");
+
+    if( action) {
+        totaldupanier = parseInt(totaldupanier);
+
+        localStorage.setItem("totalCart", totaldupanier - item.price);
+    } else if(totaldupanier != null) {
+        
+        totaldupanier = parseInt(totaldupanier);
+        localStorage.setItem("totalCart", totaldupanier + item.price);
+    
+    } else {
+        localStorage.setItem("totalCart", item.price);
+    }
+}*/
+
+
 // fonction pour charger le nombre d'articles dans le panier sur toutes les pages(from localstorage)
 function onLoadCartItems() {
     let itemsInCart = localStorage.getItem('cartItems');
@@ -177,9 +178,6 @@ function onLoadCartItems() {
         document.querySelector('.cart-items ').textContent = itemsInCart;
     }
 };
-
-
-
 onLoadCartItems();
 
 export { updatepanier};

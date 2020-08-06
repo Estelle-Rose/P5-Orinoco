@@ -79,19 +79,21 @@
                             <th scope="col" class="border-0 bg-light">
                                 <div class="py-2 text-uppercase">Total</div>
                             </th>
-                            <th scope="col" class="border-0 bg-light">
-                                <div class="py-2 text-uppercase">Supprimer</div>
-                            </th>
+                            
                             </tr>
                         </thead>
-                        <tbody class="cart_table">
-                            
-                                
-                                   
-                            
-                            
+                        <tbody class="cart_table">                        
                         </tbody>
                         </table>
+                        <div class="price-container p-4 d-flex justify-content-between">
+                            <div class="d-flex ">
+                                <h4 class="cart-total">Total du panier :</h4>
+                                <h4 class="total_price"></h4>
+                            </div>
+                            <div class="d-flex">
+                                <button class="btn btn-danger clear-cart" type="button">Vider le panier</button>
+                            </div>
+                        </div>  
                     
                     </div>
                 </div>
@@ -102,7 +104,7 @@
                     <div class="row">
                             <!--Contact-->
                         <div class="col-6 order-box">
-                            <div class="bg-light s px-4 py-3 text-uppercase font-weight-bold">Vos coordonnées </div>
+                            <div class="bg-light  px-4 py-3 text-uppercase font-weight-bold">Vos coordonnées </div>
                                 <div class="p-4">
                                     <div class="form-group">
                                         <label for="nom">Votre nom</label>
@@ -115,22 +117,13 @@
                                         <input type="text" class="form-control" placeholder="ville" id="ville">
                                         <label for="email">Votre adresse mail</label>
                                         <input type="text" class="form-control" placeholder="email" id="email">
-                                        
+                                        <a href="order.html" class="btn btn-dark rounded-pill py-2 btn-block submit-order">Valider la commande</a>                 
                                     </div>
                                 </div>
 
                         </div>
                             <!--Checkout-->
-                        
-                        <div class="col-6 order-box">
-                                <div class="bg-light s px-4 py-3 text-uppercase font-weight-bold">Résumé de votre commande</div>
-                                
-                                <div class="price-container p-4 d-flex justify-content-between">
-                                    <h4 class="cart-total">Total du panier :</h4>
-                                    <h4><span class="total_price"></span></h4>
-                                </div>      
-                                <a href="order.html" class="btn btn-dark rounded-pill py-2 btn-block submit-order">Valider la commande</a>                          
-                        </div>
+                       
                         
                     </div>
                 </div>

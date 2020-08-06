@@ -122,6 +122,12 @@ h1 {
 .cart span {
   margin-left: 10px;
 }
+.item-amount {
+  margin-left: 25px;
+}
+.total_price {
+  margin-left: 30px;
+}
   /* Order */
   .order-message {
     margin-top: 200px;
