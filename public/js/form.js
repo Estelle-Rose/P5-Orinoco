@@ -73,8 +73,7 @@ function send() {
     })
     })
     .then(function(response) {
-        if(response.ok) {
-            
+        if(response.ok) {            
             document.querySelector('.submit-order').classList.remove('disabled');
             response.json()
             .then(function(data) {
