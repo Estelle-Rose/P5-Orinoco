@@ -1,23 +1,22 @@
 // Variables et fonctions
-import {onLoadCartItems} from './index.js'; import {updatepanier} from './product.js';
+import {onLoadCartItems} from './index.js'; 
 // calcul du prix total
 function totalPrice() {    
-    let items = localStorage.getItem('cart');
-    items = JSON.parse(items);
+    
     let cartTable = document.getElementsByClassName('cart_table')[0];
     let cartRows = cartTable.querySelectorAll('.cart-row');
     let totaldupanier = 0;
-    console.log(cartRows);
+    
     for (let i = 0; i < cartRows.length; i++) {
     let cartRow = cartRows[i];
     let price = cartRow.getElementsByClassName('product_price')[0];
     let qty = cartRow.getElementsByClassName('item-amount')[0];
     let pricerow = parseFloat(price.innerText.replace('€', ''));
-    console.log(pricerow)
+    
     let quantity = parseFloat(qty.innerText);
     
     totaldupanier = totaldupanier + (pricerow * quantity);
-    console.log(totaldupanier);
+   
     
     };
     document.getElementsByClassName('total_price')[0].innerText = totaldupanier + ',00 €';
@@ -81,7 +80,6 @@ totalPrice();
 
 
 };  
-
 // Vider le panier
 let clearCart = document.querySelector('.clear-cart');
 clearCart.addEventListener ('click', (e) => {

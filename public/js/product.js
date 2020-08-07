@@ -153,24 +153,6 @@ function createItem() {
 };
 
 
-/*function totalCost( item, action ) {
-    let totaldupanier = localStorage.getItem("totalCart");
-
-    if( action) {
-        totaldupanier = parseInt(totaldupanier);
-
-        localStorage.setItem("totalCart", totaldupanier - item.price);
-    } else if(totaldupanier != null) {
-        
-        totaldupanier = parseInt(totaldupanier);
-        localStorage.setItem("totalCart", totaldupanier + item.price);
-    
-    } else {
-        localStorage.setItem("totalCart", item.price);
-    }
-}*/
-
-
 // fonction pour charger le nombre d'articles dans le panier sur toutes les pages(from localstorage)
 function onLoadCartItems() {
     let itemsInCart = localStorage.getItem('cartItems');
