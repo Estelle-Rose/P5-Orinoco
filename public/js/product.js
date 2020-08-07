@@ -65,8 +65,7 @@ for (let i = 0; i < camera.lenses.length; i++) {
 
 // ******************** Ajout au panier *******************
 
-function getAddBtn(camera) {
-    let items = localStorage.getItem('cart');
+function getAddBtn(camera) {    
     let addToCartBtn = document.querySelectorAll('.add_to_cart');    
     addToCartBtn.forEach(addToCartBtn => {     
         addToCartBtn.addEventListener('click', () => {   
@@ -129,11 +128,11 @@ function createItem() {
         let itemAdded = false;
         for (let i in newItem ) {
             if ((newItem[i].id + newItem[i].lens) === (itemId + lensChoice)) { // On check l'id du produit et l'objectif sélectionné
-                itemAdded = true;
+                itemAdded = true; // l'article est déjà dans le panier
                 let quantity = localStorage.getItem('quantity');
                 quantity = parseInt(quantity);         
                 newItem[i].quantity = parseInt(newItem[i].quantity);
-                localStorage.setItem('quantity', newItem[i].quantity += 1);
+                localStorage.setItem('quantity', newItem[i].quantity += 1); // la quantité de l'article est mise à jour dans le localsotrage 
             }
         }
 
@@ -146,7 +145,7 @@ function createItem() {
                 localStorage.getItem('id'),
                 localStorage.getItem('quantity')));
         }
-        localStorage.setItem('cart', JSON.stringify(newItem));
+        localStorage.setItem('cart', JSON.stringify(newItem)); // le nouvel article est dans le localsotrage 
         
     }
     

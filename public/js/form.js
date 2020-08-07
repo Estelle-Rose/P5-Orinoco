@@ -50,7 +50,7 @@ send();
 
 });
 
-// fetch post  - envoi du tableau products etde la fiche contact au serveur
+//  ************ api fetch post  - envoi du tableau products et de la fiche contact au serveur
 function send() {
     let newcontact = localStorage.getItem('contact');
     newcontact = JSON.parse(newcontact);
@@ -88,7 +88,7 @@ function send() {
     });
     };
 
-// **************** Get order
+// **************** Création d'une nouvelle instance de la class Order et sauvegarde des infos dans le localstorage
 
 function getOrder(data) {
     let newOrder = new Order (document.getElementsByClassName('total_price')[0].innerText, data.orderId);   
@@ -96,19 +96,5 @@ function getOrder(data) {
     localStorage.setItem('orderId', JSON.stringify(data.orderId)) ;  
       
 };
-
-// ************** Validation commande
-
-    
-let submitBtns = document.querySelector('.submit-order');
-document.querySelector('.order-id').textContent = localStorage.getItem('orderId');
-document.querySelector('.order-total').textContent  = parseInt(localStorage.getItem('totalOrder'))+ ',00€';         
-             
-            //localStorage.clear();
-   
-    
-    
-
-
 
 onLoadCartItems();
