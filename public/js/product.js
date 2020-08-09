@@ -38,14 +38,15 @@ function productCard(camera) {
     localStorage.setItem('img', document.getElementById('product_img').src);
     localStorage.setItem('price', document.getElementById('product_price').textContent);    
     localStorage.setItem('lens', camera.lenses[0]);
-    localStorage.setItem('quantity',1);
+    localStorage.setItem('quantity', 1);
     let price = localStorage.getItem('price');
     price = parseInt(price);
-    let quantity = localStorage.getItem('quantity');       
-    quantity = parseInt(quantity);    
     
     lensOption(camera);
-    getAddBtn();   
+    setQty();
+       
+    
+    
 };    
 
 // ******************* Choix de l'objectif *************************
@@ -66,33 +67,45 @@ for (let i = 0; i < camera.lenses.length; i++) {
     });   
  };    
 };
+// ************* Sélectionner la quantité et l'enregistrer dans le localstorage
+function setQty() {    
+    let qty = parseInt(localStorage.getItem('quantity'));
+    let qtyInput = document.querySelector('.item-qty');       
+    qtyInput.addEventListener('input', (e) => {                                    
+        qty = localStorage.setItem('quantity', qtyInput.value);                 
+    }); 
+    getAddBtn();   
+             
+};
 
 // ******************** Ajout au panier *******************
 
 function getAddBtn() {    
     let addToCartBtn = document.querySelectorAll('.add_to_cart');    
-    addToCartBtn.forEach(addToCartBtn => {     
-        addToCartBtn.addEventListener('click', () => {   
+    let qty = parseInt(localStorage.getItem('quantity'));      
+    addToCartBtn.forEach(addToCartBtn => {    
+        addToCartBtn.addEventListener('click', () => {  
             updatepanier();            // Met à jour le panier   
-            addItem();  // Ajoute l'article dans le localstorage
+            addItem(); // Crée l'article dans le localstorage
             addToCartBtn.setAttribute('disabled', true); // Désactive le bouton ajout et affiche 'ajouté au panier
-            addToCartBtn.textContent = 'Article ajouté au panier';                                                  
+            addToCartBtn.textContent = 'Article ajouté au panier';  
         });
     });
+    
 };
-
+    
  // ************** fonction qui met à jour le nombre d'articles dans le panier ******************
 
  function updatepanier() {    
-    
+    let qty = parseInt(localStorage.getItem('quantity'));
     let itemsInCart = localStorage.getItem('cartItems');
     itemsInCart = parseInt(itemsInCart);  
-    if(itemsInCart) {
-        localStorage.setItem('cartItems', itemsInCart + 1 );
-        document.querySelector('.cart-items').textContent = itemsInCart + 1;
+    if(!itemsInCart) {
+        localStorage.setItem('cartItems', qty );
+        document.querySelector('.cart-items').textContent =  qty;
     } else {
-        localStorage.setItem('cartItems', 1);
-        document.querySelector('.cart-items').textContent = 1 ;
+        localStorage.setItem('cartItems', itemsInCart + qty);
+        document.querySelector('.cart-items').textContent = itemsInCart + qty ;
     }     
 };
 
@@ -136,3 +149,6 @@ function onLoadCartItems() {
 onLoadCartItems();
 
 export { updatepanier};
+
+     
+

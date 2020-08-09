@@ -75,6 +75,7 @@ function send() {
     .then(function(response) {
         if(response.ok) {            
             document.querySelector('.submit-order').classList.remove('disabled');
+            alert('vous pouvez valider votre commande');
             response.json()
             .then(function(data) {
                 getOrder(data);           

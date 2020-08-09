@@ -80,12 +80,14 @@
                             <!--Quantity input button-->
                             <form class="d-flex justify-content-between">
                                 <div class="form-group  d-flex lenses-box">
-                                    <label for="lenses" required>Objectifs proposés</label>
+                                    <label for="lenses">Objectifs proposés</label>
                                     <select class="form-control" id="lenses"required></select>                       
                                 </div>                                 
                             </form>                            
-                            <div class="form-group">                                    
-                                <button  class="btn btn-secondary add_to_cart" data-id="1">Ajouter au panier</button>
+                            <div class="form-group">  
+                                <label for="quantity">Quantité</label> 
+                                <input class="item-qty" min="1" max="5" id="quantity" value="1" type="number" required="true">                                 
+                                <button  type="submit" class="btn btn-secondary add_to_cart" >Ajouter au panier</button>
                             </div>
                             
                         </div> 
