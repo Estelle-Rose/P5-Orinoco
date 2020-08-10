@@ -44,12 +44,19 @@
                 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
+                    
                     <li class="nav-item active">
-                        <a class="nav-link " href="index.html">Accueil <span class="sr-only">(current)</span></a>
+                        <a class="nav-link " href="index.html">Photo <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Meubles <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Peluches <span class="sr-only">(current)</span></a>
                     </li>
                     
                     <li class="nav-item cart">
-                        <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart" alt=" Panier"></i><span class="cart-items">0</span>
+                        <a class="nav-link" href="cart.html">Panier<i class="fas fa-shopping-cart" alt=" Panier"></i><span class="cart-items">0</span>
                         </a>
                     </li>
                     
@@ -65,7 +72,7 @@
     <div class="container">
         <header class="row">
             <div class="col-md-6 offset-md-3">
-                <h1 class="text-center">Notre sélection de produits</h1>
+                <h1 class="text-center" id="error_message">Notre sélection d'appareils photo vintages</h1>
             </div>            
         </header>
     </div>
@@ -75,9 +82,7 @@
         <div class="row d-flex flex-column">
             <div class="col-md-9 col-xs-12 d-flex flex-column" id="product_list">                    
             </div>
-           <div>
-               <p class="text-center text-white large"id="error_message"></p>
-           </div> 
+           
         </div>
     </div>
     <!--Main-->

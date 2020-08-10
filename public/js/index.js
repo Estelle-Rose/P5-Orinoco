@@ -11,7 +11,8 @@ fetch('http://localhost:3000/api/cameras/') // Url pour récupérer la liste de 
     }
 })
 .catch(function(){
-    alert("pas de réponse du serveur")
+    alert("pas de réponse du serveur");
+    document.getElementById('error_message').textContent = 'Veuillez nous excusez pour la gêne occasionnée';
 });
 
 //Fonction pour créer la liste des produits
@@ -60,8 +61,8 @@ function showProducts(cameras) {
         price.setAttribute('class','font-weight-bold');
         price.classList.add('my-2');
         linkDiv.setAttribute('class','text-center');
-        link.setAttribute('class','list-group-item');
-        link.setAttribute('id', 'lien_fiche');
+        linkDiv.classList.add('w-50', 'mt-3');
+        link.setAttribute('class','list-group-item');        
         link.setAttribute('href', "product.html?_id=" + camera._id);
         link.classList.add('list-group-item-secondary');
         img.setAttribute('class','ml-lg-5');
@@ -71,11 +72,8 @@ function showProducts(cameras) {
         name.innerHTML = camera.name;
         price.innerHTML = camera.price / 100 + " €";
         img.setAttribute('src', camera.imageUrl);
-        link.innerHTML = "Voir le produit";
-        link.setAttribute('id', 'fiche_produit'); // Id du lien vers fiche produit        
+        link.innerHTML = "Voir le produit";        
         };
-        
-     
 };
 
 // fonction pour afficher le nombre d'articles dans le panier (from localstorage)

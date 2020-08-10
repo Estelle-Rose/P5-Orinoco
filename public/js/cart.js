@@ -39,6 +39,7 @@ function showItemsInCart() {
     let itemsInCart = localStorage.getItem('cartItems');
     if (itemsInCart === null) {
         document.querySelector('.cart-container').style.display = 'none';
+        document.querySelector('.panier-title').classList.add('mt-5');
         document.querySelector('.panier-title').textContent = 'Votre panier est vide';
     } else { // Implémentation des produits, on ajoute une ligne au tableau à chaque item                  
             
