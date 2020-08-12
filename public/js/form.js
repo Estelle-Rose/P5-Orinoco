@@ -2,7 +2,7 @@
 import {loadCartItems} from './index.js'; 
 
 
-// ************* Crétaion de la class contact contenant les infos client requis
+// ************* Création de la class contact contenant les infos client requis
 
 class Contact {
     constructor(prenom, nom, adresse, ville, email) {
@@ -16,7 +16,7 @@ class Contact {
 
 // ************ Création du tableau products qui contiendra les ids des produits pour l'envoi au serveur
 
-let products = []; // tableau products
+let products = []; // initialisation du tableau products
 let itemsInCart = JSON.parse(localStorage.getItem('cart'));
 for( let i = 0; i < itemsInCart.length; i++) {   // pour chaque article on push son id dans le tableau
     products.push(itemsInCart[i].id);
@@ -68,7 +68,7 @@ function send() {
             alert('vous pouvez valider votre commande'); // notifie l'utilisateur
             response.json()
             .then(function(data) {
-                getOrder(data);          // appel de la fonction getOrder qui stocke les infos qui seront dispatcher sur la page de confirmation de commande
+                getOrder(data);          // appel de la fonction getOrder qui stocke les infos qui seront dispatchés sur la page de confirmation de commande
             console.log(data);     
             })
         }
