@@ -24,8 +24,8 @@ for( let i = 0; i < itemsInCart.length; i++) {   // pour chaque article on push 
 };
 
 // ************ Création de l'objet contact qui contiendra les infos du client
-let sendFormBtn = document.querySelector('.submit-form');
-sendFormBtn.addEventListener('click', (e) => { // écoute du bouton envoyer au clic
+let form = document.querySelector('#contact-form');
+form.addEventListener('submit', (e) => { // écoute du #contact-form
     event.preventDefault();
     let newcontact = new Contact (      // création d'un nouvel objet contact contenant les coordonnées de l'utilisateur
         document.querySelector('#prenom').value,
@@ -67,6 +67,7 @@ function send() {
             document.querySelector('.submit-order').classList.remove('disabled'); // active la validation de commande 
             alert('vous pouvez valider votre commande'); // notifie l'utilisateur
             response.json()
+            
             .then(function(data) {
                 getOrder(data);          // appel de la fonction getOrder qui stocke les infos qui seront dispatchés sur la page de confirmation de commande
             console.log(data);     
