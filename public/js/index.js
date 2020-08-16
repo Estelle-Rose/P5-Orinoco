@@ -4,7 +4,8 @@ fetch('http://localhost:3000/api/cameras/') // Url pour récupérer la liste de 
     if(response.ok) {
         response.json()
         .then(function(cameras) {
-            showProducts(cameras); // appel de la fonction showProducts qui affichera les produits à réception des données
+            showProducts(cameras); 
+            // appel de la fonction showProducts qui affichera les produits à réception des données
         });
     }
 })
@@ -74,7 +75,7 @@ function showProducts(cameras) {
         };
 };
 
-// ************* fonction pour afficher le nombre d'articles dans le panier (from localstorage) reprise sur chaque page
+// ************* fonction pour afficher le nombre d'articles dans le panier (from localstorage) reprise sur chaque page 2 : 
 function loadCartItems() {
     let itemsInCart = localStorage.getItem('cartItems');
     if(itemsInCart) {
