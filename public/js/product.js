@@ -1,164 +1,139 @@
+import {loadCartItems} from './index.js'; 
+
 // ****************** récupération de l'id produit **********************
 
 let queryString = window.location.search;
 let urlParams = new URLSearchParams(queryString);
 let idProduit = urlParams.get("_id");
+let items = JSON.parse(localStorage.getItem('cart'));
+if(items === null) {
+    let cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));    
+    }
 
-//  ***************** appel de l'api avec l'id produit en paramètre ***************
+//  ***************** nouvel appel avec l'api fetch avec l'id produit en paramètre ***************
 fetch('http://localhost:3000/api/cameras/' + idProduit)
 .then(function(response) {
     if(response.ok) {
         response.json()        
-        .then(function(camera) {
-            //console.log(camera)
-            productCard(camera); // appel de la fonction productCard            
+        .then(function(camera) {        
+            productCard(camera); // appel de la fonction productCard qui affiche le produit         
         });
     }
 })
-.catch(function(){
-    alert("pas de réponse du serveur")
+.catch(function(){ // gestion de l'erreur serveur
+    alert("pas de réponse du serveur");
+    document.getElementsByClassName('error_message').textContent = 'Veuillez nous excusez pour la gêne occasionnée';
 });
 
 //  ********************* fonction création de la carte produit ***********************
 function productCard(camera) {    
       
-    document.getElementById('product_name').textContent = camera.name; // Nom du produit
-    document.getElementById('product_description').textContent = camera.description; // Description du produit
-    document.getElementById('product_price').textContent = camera.price / 100; // Prix du produit
-    document.getElementById('product_img').setAttribute('src', camera.imageUrl); // Image du produit    
+    document.getElementById('product_name').textContent = camera.name;      // Nom du produit
+    document.getElementById('product_description').textContent = camera.description;        // Description du produit
+    document.getElementById('product_price').textContent = camera.price / 100;      // Prix du produit
+    document.getElementById('product_img').setAttribute('src', camera.imageUrl);        // Image du produit    
     
     // ************** localstorage des données de la carte produit ***********************
     localStorage.setItem('id', camera._id);
     localStorage.setItem('name', document.getElementById('product_name').textContent);
     localStorage.setItem('img', document.getElementById('product_img').src);
     localStorage.setItem('price', document.getElementById('product_price').textContent);    
-    localStorage.setItem('lens', camera.lenses[0]);
-    localStorage.setItem('quantity',1);
-    let price = localStorage.getItem('price');
-    price = parseInt(price);
-    let quantity = localStorage.getItem('quantity');       
-    quantity = parseInt(quantity);    
+    localStorage.setItem('lens', camera.lenses[0]);     // l'objectif est stocké par défaut pour le cas où celui-ci n'est pas sélectionné par l'utilisateur
+    localStorage.setItem('quantity', 1);    // La quantité est définie par défaut = 1 pour le cas  où elle n'est pas sélectionnée par l'utilisateur
+    lensOption(camera);         // appel de la fonction qui choisit l'objectif
+    setQty();       // appel de la fonction qui choisit la quantité
+    getAddBtn();        // appel de la fonction qui ajoute le produit au panier 
     
-    lensOption(camera);
-    getAddBtn(camera);   
 };    
 
 // ******************* Choix de l'objectif *************************
 
 function lensOption(camera) {
-let lenses = document.getElementById('lenses');   
+let lenses = document.getElementById('lenses');   // manipulation du dom et création des balises option
 
-for (let i = 0; i < camera.lenses.length; i++) {
+for (let i = 0; i < camera.lenses.length; i++) { 
     let lensOption = document.createElement('option');
     lensOption.setAttribute('value', camera.lenses[i]);
     lenses.appendChild(lensOption);
     lensOption.setAttribute('value', camera.lenses[i]);
     lensOption.textContent = camera.lenses[i];
 
-    lenses.addEventListener('change', (e) => {
+    lenses.addEventListener('change', (e) => {      // écoute de l'évènement change
         let lensChoice = document.getElementById('lenses').value;
-        localStorage.setItem('lens', lensChoice); // récupération du choix de l'objectif dans le localstorage
-    });
-   
+        localStorage.setItem('lens', lensChoice);       // récupération du choix de l'objectif dans le localstorage
+    });   
  };    
+};
+// ************* Sélectionner la quantité et l'enregistrer dans le localstorage
+function setQty() {    
+    let qty = parseInt(localStorage.getItem('quantity'));
+    let qtyInput = document.querySelector('.item-qty');       
+    qtyInput.addEventListener('input', (e) => {                // écoute de l'évènement input                     
+        qty = localStorage.setItem('quantity', qtyInput.value);      // stockage de la quantité choisie           
+    });                
 };
 
 // ******************** Ajout au panier *******************
 
-function getAddBtn(camera) {    
+function getAddBtn() {    
     let addToCartBtn = document.querySelectorAll('.add_to_cart');    
-    addToCartBtn.forEach(addToCartBtn => {     
-        addToCartBtn.addEventListener('click', () => {   
-            console.log('added to cart');   
-            updatepanier();              
-            createItem();                                       
+    addToCartBtn.forEach(addToCartBtn => {    
+        addToCartBtn.addEventListener('click', () => {      // écoute du clic
+            updateCart();            // Appel de la fonction qui met à jour le panier   
+            addItem();      // Appel de la fonction qui crée l'article dans le localstorage
+            
+            addToCartBtn.setAttribute('disabled', true); // Désactive le bouton ajout et affiche article ajouté au panier
+            addToCartBtn.textContent = 'Article ajouté au panier'; 
+            
         });
-    });
+    });    
 };
-
+    
  // ************** fonction qui met à jour le nombre d'articles dans le panier ******************
 
- function updatepanier() {    
-    
+ function updateCart() {    
+    let qty = parseInt(localStorage.getItem('quantity')); // récupère la quantité
     let itemsInCart = localStorage.getItem('cartItems');
     itemsInCart = parseInt(itemsInCart);  
-    if(itemsInCart) {
-        localStorage.setItem('cartItems', itemsInCart + 1 );
-        document.querySelector('.cart-items').textContent = itemsInCart + 1;
+    if(!itemsInCart) {
+        localStorage.setItem('cartItems', qty );         // définit le nombre d'articles dans le panier
+        document.querySelector('.cart-items').textContent =  qty;   // affiche la quantité
     } else {
-        localStorage.setItem('cartItems', 1);
-        document.querySelector('.cart-items').textContent = 1 ;
+        localStorage.setItem('cartItems', itemsInCart + qty);   // s'il y a déjà un article on ajoute la quantité
+        document.querySelector('.cart-items').textContent = itemsInCart + qty ;     // affiche la quantité
     }     
 };
 
 //  *************** Création de la class Item, chaque article étant un objet ******************
 
 class Item {
-    constructor(image, name, lens, price, id, quantity, totalItemCost) {
+    constructor(image, name, lens, price, id, quantity,) {
         this.image = image,
         this.name = name,
         this.lens = lens,
         this.price = price,
         this.id = id, 
-        this.quantity = quantity,
-        this.totalItemCost = totalItemCost;                    
+        this.quantity = quantity;                    
     }
 };
-
-//*************** Nouvel article ou ajout de la quantité si article existant  ******************
-
-function createItem() {
-    let itemId = idProduit;
-    let lensChoice = localStorage.getItem('lens');    
-    let items = JSON.parse(localStorage.getItem('cart'));
-    if (items === null) { // si c'est le premier article sélectionné et ajouté, on créé un premier article et on l'ajoute au tableau du panier
-        let cart = [];
-        // création de l'article sélectionné
-        let firstItem = new Item (localStorage.getItem('img'),
-        localStorage.getItem('name'),
-        localStorage.getItem('lens'),
-        localStorage.getItem('price'),
-        localStorage.getItem('id'),
-        localStorage.getItem('quantity'));           
-        cart.push(firstItem);
-        localStorage.setItem('cart', JSON.stringify(cart));   // l'article est dans le localsotrage 
-       
-    } else { // On vérifie si le produit a déjà été ajouté, si oui on ajoute + 1 à la quantité de l'article
-        let newItem = JSON.parse(localStorage.getItem('cart'));
-        let itemAdded = false;
-        for (let i in newItem ) {
-            if ((newItem[i].id + newItem[i].lens) === (itemId + lensChoice)) { // On check l'id du produit et l'objectif sélectionné
-                itemAdded = true; // l'article est déjà dans le panier
-                let quantity = localStorage.getItem('quantity');
-                quantity = parseInt(quantity);         
-                newItem[i].quantity = parseInt(newItem[i].quantity);
-                localStorage.setItem('quantity', newItem[i].quantity += 1); // la quantité de l'article est mise à jour dans le localsotrage 
-            }
-        }
-
-        if (!itemAdded) { // Si le produit n'a pas déjà été ajouté on ajoute un deuxième article
-            newItem.push(new Item( 
-                localStorage.getItem('img'),
-                localStorage.getItem('name'),
-                localStorage.getItem('lens'),
-                localStorage.getItem('price'),
-                localStorage.getItem('id'),
-                localStorage.getItem('quantity')));
-        }
-        localStorage.setItem('cart', JSON.stringify(newItem)); // le nouvel article est dans le localsotrage 
-        
-    }
     
+//*************** Nouvel article dans le localstorage  ******************
+function addItem() {
+    let items = JSON.parse(localStorage.getItem('cart'));
+    
+    // création de l'article sélectionné
+    let firstItem = new Item (localStorage.getItem('img'),
+    localStorage.getItem('name'),
+    localStorage.getItem('lens'),
+    localStorage.getItem('price'),
+    localStorage.getItem('id'),
+    localStorage.getItem('quantity'));    
+    
+    items.push(firstItem);      // le nouvel article est ajouté au tableau
+    localStorage.setItem('cart', JSON.stringify(items));   
+
 };
+loadCartItems();
 
 
-// fonction pour charger le nombre d'articles dans le panier sur toutes les pages(from localstorage)
-function onLoadCartItems() {
-    let itemsInCart = localStorage.getItem('cartItems');
-    if(itemsInCart) {
-        document.querySelector('.cart-items ').textContent = itemsInCart;
-    }
-};
-onLoadCartItems();
-
-export { updatepanier};

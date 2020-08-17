@@ -8,17 +8,14 @@
     <title>Orinoco - Notre choix de caméras</title>        
     <meta name="description" content="">
     <meta name="robots" content="noindex, nofollow">
-    
     <!-- Bootstrap CSS -->
     <script src="https://kit.fontawesome.com/862e0a79f6.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    
     <!-- Javascfipt-->
     <script type ="module" src= "js/product.js" async></script>
 </head>
 <body>
-  
     <div class="container-fluid">
         <div class="row">
             <nav class="col navbar navbar-expand-lg navbar-dark bg-secondary">
@@ -26,36 +23,34 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <img src="images/logo_orinoco.png" id="logo_orinoco">
-                
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
-                    <li class="nav-item active">
-                        <a class="nav-link " href="index.html">Accueil <span class="sr-only">(current)</span></a>
-                    </li>
-                    
-                    <li class="nav-item cart">
-                        <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart" alt=" Panier"></i><span class="cart-items">0</span>
-                        </a>
-                    </li>
-                    
-                    
+                        <li class="nav-item active">
+                            <a class="nav-link " href="index.html">Oricamera <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#">Orifurniture<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#">Oriplush <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item cart">
+                            <a class="nav-link" href="cart.html">Panier<i class="fas fa-shopping-cart" alt=" Panier"></i><span class="cart-items">0</span>
+                            </a>
+                        </li>                 
                     </ul>
-                    
                 </div>
             </nav>
         </div>
     </div>   
-
     <!--Header-->
     <div class="container">
         <header class="row">
             <div class="col-md-6 offset-md-3">
-                <h1 class="text-center" id="product_name"></h1>
+                <h1 class="text-center" id="product_name" class="error-product"></h1>
             </div>
-            
         </header>
     </div>
-
     <!--Main-->
     <div class="container main">
         <div class="row d-flex flex-column">
@@ -71,23 +66,22 @@
                                 <span>Prix :</span>
                                 <span id="product_price"></span><span class="euros">,00 €</span>
                             </div>                       
-                            
                         </div>          
-                                   
                     </div>
                     <div class="card-footer bg-transparent ">
                         <div class="d-flex justify-content-between">                            
                             <!--Quantity input button-->
                             <form class="d-flex justify-content-between">
                                 <div class="form-group  d-flex lenses-box">
-                                    <label for="lenses" required>Objectifs proposés</label>
+                                    <label for="lenses">Objectifs proposés</label>
                                     <select class="form-control" id="lenses"required></select>                       
                                 </div>                                 
                             </form>                            
-                            <div class="form-group">                                    
-                                <button  class="btn btn-secondary add_to_cart" data-id="1">Ajouter au panier</button>
+                            <div class="form-group">  
+                                <label for="quantity">Quantité</label> 
+                                <input class="item-qty" min="1" max="5" id="quantity" value="1" type="number" required="true">                                 
+                                <button  type="submit" class="btn btn-secondary add_to_cart" >Ajouter au panier</button>
                             </div>
-                            
                         </div> 
                     </div>
                 </div>
@@ -96,22 +90,16 @@
     </div>
     <!-- Footer -->
     <footer class="page-footer font-small bg-secondary fixed-bottom">
-
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2020 Copyright:
       <a href="#" class="text-white"> Orinoco</a>
     </div>
     <!-- Copyright -->
-  
     </footer>
     <!-- Footer -->
-
-
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
- 
-    
 </body>
 </html>

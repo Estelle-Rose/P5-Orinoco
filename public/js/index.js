@@ -1,20 +1,20 @@
-
- // Url pour récupérer la liste de caméras
-// Api fetch
+// ************ Récupérer la liste des produits avec la fonction fetch qui effectue une requête GET 
 fetch('http://localhost:3000/api/cameras/') // Url pour récupérer la liste de caméras
-.then(function(response) {
+.then(function(response) { // fetch renvoie une promesse et une réponse ici le fichier au format json
     if(response.ok) {
         response.json()
         .then(function(cameras) {
-            showProducts(cameras);
+            showProducts(cameras); 
+            // appel de la fonction showProducts qui affichera les produits à réception des données
         });
     }
 })
-.catch(function(){
-    alert("pas de réponse du serveur")
+.catch(function(){ // Gestion de l'erreur côté serveur
+    alert("pas de réponse du serveur");
+    document.getElementById('error_message').textContent = 'Veuillez nous excusez pour la gêne occasionnée';
 });
 
-//Fonction pour créer la liste des produits
+// ************* Fonction pour créer la liste des produits
 function showProducts(cameras) {
     for (let camera of cameras) {            
 
@@ -60,9 +60,9 @@ function showProducts(cameras) {
         price.setAttribute('class','font-weight-bold');
         price.classList.add('my-2');
         linkDiv.setAttribute('class','text-center');
-        link.setAttribute('class','list-group-item');
-        link.setAttribute('id', 'lien_fiche');
-        link.setAttribute('href', "product.html?_id=" + camera._id);
+        linkDiv.classList.add('w-50', 'mt-3');
+        link.setAttribute('class','list-group-item');        
+        link.setAttribute('href', "product.html?_id=" + camera._id); // implémentation de l'id du produit qui servira pour la page produit
         link.classList.add('list-group-item-secondary');
         img.setAttribute('class','ml-lg-5');
         img.classList.add('order-1','order-lg-2');    
@@ -71,20 +71,17 @@ function showProducts(cameras) {
         name.innerHTML = camera.name;
         price.innerHTML = camera.price / 100 + " €";
         img.setAttribute('src', camera.imageUrl);
-        link.innerHTML = "Voir le produit";
-        link.setAttribute('id', 'fiche_produit'); // Id du lien vers fiche produit        
+        link.innerHTML = "Voir le produit";        
         };
-        
-     
 };
 
-// fonction pour afficher le nombre d'articles dans le panier (from localstorage)
-function onLoadCartItems() {
+// ************* fonction pour afficher le nombre d'articles dans le panier (from localstorage) reprise sur chaque page 2 : 
+function loadCartItems() {
     let itemsInCart = localStorage.getItem('cartItems');
     if(itemsInCart) {
         document.querySelector('.cart-items').textContent = itemsInCart;
     }
 };
-onLoadCartItems();
+loadCartItems();
 
-export {onLoadCartItems};
+export {loadCartItems};
