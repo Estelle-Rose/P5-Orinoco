@@ -1,9 +1,17 @@
 # P5-Orinoco
-P5- Orinoco - site e commerce - formation DW Openclassrooms
 
-<h3>Prerequisites</h3> 
-You will need to have Node and npm installed locally on your machine.
 
-<h3>Installation</h3>
+P5- Orinoco - site e commerce - formation DW Openclassrooms.
+Ce projet consiste en l'élaboration de la partie frontend d'une application web de vente de produits.
+L'obectif étant la mise en pratique de javascript pour le web.
 
-Clone this repo. From within the project folder, run npm install. You can then run the server with node server. The server should run on localhost with default port 3000. If the server runs on another port for any reason, this is printed to the console when the server starts, e.g. Listening on port 3001.
+ ## Prérequis ##
+ 
+Merci d'intaller Node et 'npm' en local sur votre machine
+
+## Installation ##
+
+Cloner le repo.
+Lancer 'npm install' depuis le projet, puis lancer le serveur avec 'node server'.
+Le serveur devrait démarrer sur 'localhost' avec le port '3000'. Si le serveur utilise un autre port pour quelque raison que ce soit, le port est affiché dans la console au démarrage du serveur.
+Vous pouvez alors accéder à l'application via la page index.html.
