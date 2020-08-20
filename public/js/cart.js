@@ -8,7 +8,8 @@ function loadCartItems() {
 loadCartItems();
 
 //  ******************* calcul du prix total
-function totalPrice() {    
+async function totalPrice() {    
+    await showItemsInCart(); // appel de la fonction qui affiche les produits dans le panier
     
     let cartTable = document.getElementsByClassName('cart_table')[0]; // récupère le tableau qui affiche les produits du panier
     let cartRows = cartTable.querySelectorAll('.cart-row');     // récupère les rangées du tableau
@@ -26,8 +27,7 @@ function totalPrice() {
 };
 
 //  ****************** Affichage des articles dans le tableau page panier
-function showItemsInCart() {   
-    
+function showItemsInCart() {       
     let items = localStorage.getItem('cart');   // récupère le tableau contenant les articles dans le localstorage
     items = JSON.parse(items);         
     let cartTable = document.querySelector('.cart_table');  // récupère le tableau
@@ -68,7 +68,7 @@ function showItemsInCart() {
                                                                             
             }      
     }
-    totalPrice();   // appel de la fonction qui calcule le total du panier
+ 
                 
 };
 
@@ -81,4 +81,5 @@ clearCart.addEventListener ('click', (e) => { // écoute du clic
 
 
 loadCartItems();   
-showItemsInCart(); // appel de la fonction qui affiche les produits dans le panier
+
+totalPrice(); // appel de la fonction qui calcule le total du panier
