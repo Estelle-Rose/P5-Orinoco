@@ -84,4 +84,3 @@ function loadCartItems() {
 };
 loadCartItems();
 
-export {loadCartItems};

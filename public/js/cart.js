@@ -1,5 +1,11 @@
-//  ****************** Variables et fonctions
-import {loadCartItems} from './index.js'; 
+// ************* fonction pour afficher le nombre d'articles dans le panier (from localstorage) reprise sur chaque page 2 : 
+function loadCartItems() {
+    let itemsInCart = localStorage.getItem('cartItems');
+    if(itemsInCart) {
+        document.querySelector('.cart-items').textContent = itemsInCart;
+    }
+};
+loadCartItems();
 
 //  ******************* calcul du prix total
 function totalPrice() {    
