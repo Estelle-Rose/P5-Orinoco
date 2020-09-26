@@ -83,8 +83,7 @@ function getAddBtn() {
             alert(message = 'Article ajouté au panier');
             updateCart();            // Appel de la fonction qui met à jour le panier   
             addItem();      // Appel de la fonction qui crée l'article dans le localstorage             
-            //addToCartBtn.setAttribute('disabled', true); // Désactive le bouton ajout et affiche article ajouté au panier            
-            //addToCartBtn.textContent = 'Article ajouté au panier';             
+            
         });
     });    
 };
