@@ -1,6 +1,9 @@
+let apiUrl =(location.hostname === "localhost" || location.hostname === "127.0.0.1")
+? "http://localhost:3000/"
+: "https://test-orinoco.herokuapp.com/"
 // ************* Fonction pour créer la liste des produits
 async function showProducts() {
-    await fetch('http://localhost:3000/api/cameras/') // Récupérer la liste des produits avec la fonction fetch qui effectue une requête GET
+    await fetch(`${apiUrl}api/cameras/` ) // Récupérer la liste des produits avec la fonction fetch qui effectue une requête GET
     .then(response => { // fetch renvoie une promesse et une réponse ici le fichier au format json
         if(response.ok) {
             response.json()            

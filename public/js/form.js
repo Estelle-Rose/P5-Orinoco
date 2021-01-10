@@ -1,3 +1,7 @@
+let apiUrl =(location.hostname === "localhost" || location.hostname === "127.0.0.1")
+? "http://localhost:3000/"
+: "https://test-orinoco.herokuapp.com/"
+
 // ************* fonction pour afficher le nombre d'articles dans le panier (from localstorage) reprise sur chaque page 2 : 
 function loadCartItems() {
     let itemsInCart = localStorage.getItem('cartItems');
@@ -54,7 +58,7 @@ function send() {
     let products = localStorage.getItem('products');    // récupère le tableau products
     products = JSON.parse(products);
     // send post request
-    fetch('http://localhost:3000/api/cameras/order', {  // envoi des données
+    fetch(`${apiUrl}api/cameras/order`, {  // envoi des données
         method: 'POST',    
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({            

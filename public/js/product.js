@@ -1,4 +1,6 @@
-// ************* fonction pour afficher le nombre d'articles dans le panier (from localstorage) reprise sur chaque page 2 : 
+let apiUrl =(location.hostname === "localhost" || location.hostname === "127.0.0.1")
+? "http://localhost:3000/"
+: "https://test-orinoco.herokuapp.com/"// ************* fonction pour afficher le nombre d'articles dans le panier (from localstorage) reprise sur chaque page 2 : 
 function loadCartItems() {
     let itemsInCart = localStorage.getItem('cartItems');
     if(itemsInCart) {
@@ -18,7 +20,7 @@ if(items === null) {
     }
 //  ********************* fonction création de la carte produit ***********************
 async function productCard(camera) {   
-    await fetch('http://localhost:3000/api/cameras/' + idProduit) // nouvel appel avec l'api fetch avec l'id produit en paramètre
+    await fetch(`${apiUrl}api/cameras/` + idProduit) // nouvel appel avec l'api fetch avec l'id produit en paramètre
     .then(response => {
         if(response.ok) {
             response.json()        
