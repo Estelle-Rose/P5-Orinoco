@@ -1,6 +1,4 @@
-let apiUrl =(location.hostname === "localhost" || location.hostname === "127.0.0.1")
-? "http://localhost:3000/"
-: "https://test-orinoco.herokuapp.com/"
+
 
 // ************* fonction pour afficher le nombre d'articles dans le panier (from localstorage) reprise sur chaque page 2 : 
 function loadCartItems() {
